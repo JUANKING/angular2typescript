@@ -21,6 +21,9 @@ var ParticleService = (function () {
             return setTimeout(function () { return resolve(mock_particles_1.PARTICLES); }, 2000);
         });
     };
+    ParticleService.prototype.getParticle = function (id) {
+        return this.getParticles().then(function (particles) { return particles.filter(function (particle) { return particle.id === id; })[0]; });
+    };
     ParticleService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

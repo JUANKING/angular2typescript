@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Particle} from './particle';
+import {ParticleService} from './particle.service'
+import {RouteParams} from '@angular/router-deprecated';
 
 @Component({
   selector: 'my-particle-detail',
@@ -15,9 +17,21 @@ import {Particle} from './particle';
          <input [(ngModel)]="particle.mass" placeholder="masa">
        </div>
    </div>
+   <button (click)="goBack()">Atras</button>
   `
 })
-export class ParticleDetailComponent {
-    @Input() 
-    particle: Particle;
+export class ParticleDetailComponent  implements OnInit{
+    constructor(
+      private _particleService: ParticleService,
+      private _routeParams: RouteParams) {
+    }
+    particle:Particle;
+    ngOnInit() {
+      let id = this._routeParams.get('id');
+      this._particleService.getParticle(id)
+        .then(particle => this.particle = particle);
+    }
+    goBack() {
+      window.history.back();
+    }
 }
