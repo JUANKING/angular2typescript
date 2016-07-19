@@ -1,5 +1,5 @@
 <h1>{{titulo}}</h1>
-<ul class="particles">
+<ul class="particles">{{particlesHttp}}
   <li *ngFor="let particle of particles"
     (click)="onSelect(particle)"
     [class.selected]="particle === selectedParticle">

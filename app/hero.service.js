@@ -9,16 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var mock_particles_1 = require('./mock-particles');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
-require('./rxjs-operators');
 var ParticleService = (function () {
     function ParticleService(http) {
         this.http = http;
         this.particlesUrl = 'app/particles.json';
     }
-    ParticleService.prototype.getParticlesJson = function () {
+    ParticleService.prototype.getHeroes = function () {
         return this.http.get(this.particlesUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
@@ -28,17 +26,6 @@ var ParticleService = (function () {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
     };
-    ParticleService.prototype.getParticles = function () {
-        return Promise.resolve(mock_particles_1.PARTICLES);
-    };
-    ParticleService.prototype.getParticlesSlowly = function () {
-        return new Promise(function (resolve) {
-            return setTimeout(function () { return resolve(mock_particles_1.PARTICLES); }, 2000);
-        });
-    };
-    ParticleService.prototype.getParticle = function (id) {
-        return this.getParticles().then(function (particles) { return particles.filter(function (particle) { return particle.id === id; })[0]; });
-    };
     ParticleService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
@@ -46,4 +33,4 @@ var ParticleService = (function () {
     return ParticleService;
 }());
 exports.ParticleService = ParticleService;
-//# sourceMappingURL=particle.service.js.map
+//# sourceMappingURL=hero.service.js.map

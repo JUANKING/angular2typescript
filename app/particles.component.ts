@@ -14,15 +14,20 @@ export class ParticlesComponent implements OnInit{
   constructor(private _particleService: ParticleService, private _router: Router) { }
   titulo = 'Modelo estándar';
    particles;
+   particlesHttp;
    selectedParticle: Particle;
    onSelect(particle: Particle) {
         this.selectedParticle = particle; 
     }
     ngOnInit() {
         this._particleService.getParticles()
-        .then(
-          particles => this.particles = particles
-      )
+            .then(
+            particles => this.particles = particles
+        )
+        this._particleService.getParticlesJson()
+            .then(
+            particlesHttp => this.particlesHttp = particlesHttp
+        )
     }
     gotoDetail(){
       this._router.navigate(['ParticleDetail', { id: this.selectedParticle.id }]);

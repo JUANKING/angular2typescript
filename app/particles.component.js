@@ -24,6 +24,8 @@ var ParticlesComponent = (function () {
         var _this = this;
         this._particleService.getParticles()
             .then(function (particles) { return _this.particles = particles; });
+        this._particleService.getParticlesJson()
+            .then(function (particlesHttp) { return _this.particlesHttp = particlesHttp; });
     };
     ParticlesComponent.prototype.gotoDetail = function () {
         this._router.navigate(['ParticleDetail', { id: this.selectedParticle.id }]);
